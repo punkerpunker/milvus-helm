@@ -5,7 +5,7 @@ cluster:
 image:
   all:
     repository: milvusdb/milvus
-    tag: v2.2.4
+    tag: v2.2.10
     pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
@@ -58,6 +58,7 @@ extraConfigFiles:
 service:
   type: ClusterIP
   port: 19530
+  portName: milvus
   nodePort: ""
   annotations: {}
   labels: {}
@@ -105,6 +106,8 @@ serviceAccount:
 
 metrics:
   enabled: true
+  port: 9091
+  portName: metrics
 
   serviceMonitor:
     # Set this to `true` to create ServiceMonitor for Prometheus operator
@@ -398,11 +401,12 @@ attu:
   name: attu
   image:
     repository: zilliz/attu
-    tag: v2.2.3
+    tag: v2.2.4
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
     port: 3000
+    # loadBalancerIP: ""
   resources: {}
   ingress:
     enabled: false
@@ -427,7 +431,7 @@ minio:
   name: minio
   mode: distributed
   image:
-    tag: "RELEASE.2022-03-17T06-34-49Z"
+    tag: "RELEASE.2023-03-20T20-16-18Z"
     pullPolicy: IfNotPresent
   accessKey: minioadmin
   secretKey: minioadmin
@@ -684,7 +688,7 @@ pulsar:
       defaultRetentionSizeInMB: "-1"
       backlogQuotaDefaultLimitGB: "8"
       ttlDurationDefaultInSeconds: "259200"
-      subscriptionExpirationTimeMinutes: "30"
+      subscriptionExpirationTimeMinutes: "3"
       backlogQuotaDefaultRetentionPolicy: producer_exception
     pdb:
       usePolicy: false

@@ -152,7 +152,7 @@ The following table lists the configurable parameters of the Milvus Service and 
 |-------------------------------------------|-----------------------------------------------|---------------------------------------------------------|
 | `cluster.enabled`                         | Enable or disable Milvus Cluster mode         | `true`                                                 |
 | `image.all.repository`                    | Image repository                              | `milvusdb/milvus`                                       |
-| `image.all.tag`                           | Image tag                                     | `v2.2.1`                           |
+| `image.all.tag`                           | Image tag                                     | `v2.2.10`                           |
 | `image.all.pullPolicy`                    | Image pull policy                             | `IfNotPresent`                                          |
 | `image.all.pullSecrets`                   | Image pull secrets                            | `{}`                                                    |
 | `image.tools.repository`                  | Config image repository                       | `milvusdb/milvus-config-tool`                                       |
@@ -161,6 +161,7 @@ The following table lists the configurable parameters of the Milvus Service and 
 | `extraConfigFiles`                        | Extra config to override default milvus.yaml  | `user.yaml:`                                                     |
 | `service.type`                            | Service type                                  | `ClusterIP`                                             |
 | `service.port`                            | Port where service is exposed                 | `19530`                                                 |
+| `service.portName`                        | Useful for [Istio protocol selection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/)   | `milvus`                                                |
 | `service.nodePort`                        | Service nodePort                              | `unset`                                                 |
 | `service.annotations`                     | Service annotations                           | `{}`                                                    |
 | `service.labels`                          | Service custom labels                         | `{}`                                                    |
@@ -178,6 +179,8 @@ The following table lists the configurable parameters of the Milvus Service and 
 | `serviceAccount.annotations`              | Service Account Annotations                   | `{}`                                                    |
 | `serviceAccount.labels`                   | Service Account labels                        | `{}`                                                    |
 | `metrics.enabled`                         | Export Prometheus monitoring metrics          | `true`                                                  |
+| `metrics.port`                            | Metrics service port                          | `9091`                                                  |
+| `metrics.portName`                        | Metrics service port name. Useful for [Istio protocol selection](https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/)                    | `metrics`                                                  |
 | `metrics.serviceMonitor.enabled`          | Create ServiceMonitor for Prometheus operator | `false`                                                 |
 | `metrics.serviceMonitor.additionalLabels` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus | `unset`         |
 | `log.level`                               | Logging level to be used. Valid levels are `debug`, `info`, `warn`, `error`, `fatal` | `info`          |

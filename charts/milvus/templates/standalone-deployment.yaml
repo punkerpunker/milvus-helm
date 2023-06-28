@@ -68,7 +68,7 @@ spec:
         image: "{{ .Values.image.all.repository }}:{{ .Values.image.all.tag }}"
         imagePullPolicy: {{ .Values.image.all.pullPolicy }}
         {{- if .Values.standalone.heaptrack.enabled }}
-        args: [ "/milvus/tools/heaptrack/bin/heaptrack", "/milvus/tools/run-helm.sh", "milvus", "run", "standalone" ]
+        args: [ "/milvus/tools/run-helm.sh", "/milvus/tools/heaptrack/bin/heaptrack", "milvus", "run", "standalone" ]
         {{- else }}
         args: [ "/milvus/tools/run-helm.sh", "milvus", "run", "standalone" ]
         {{- end }}
@@ -137,12 +137,8 @@ spec:
           mountPath: {{ .Values.log.persistence.mountPath | quote }}
           subPath: {{ .Values.log.persistence.persistentVolumeClaim.subPath | default "" }}
         {{- end }}
-        {{- if .Values.standalone.heaptrack.enabled }}
-        - mountPath: /milvus/tools
-          name: heaptrack
-        {{- end }}
         {{- if .Values.standalone.disk.enabled }}
-        - mountPath: /milvus/data
+        - mountPath: /var/lib/milvus/data
           name: disk
         {{- end }}
 
